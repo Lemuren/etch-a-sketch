@@ -14,7 +14,8 @@ h1 {
 .sidepanel {
     background: red;
     padding: 8px;
-    margin: 32px;
+    margin: 0 32px 32px 32px;
+    height: 100%;
 }
 
 .color-picker {
@@ -54,4 +55,16 @@ h1 {
     padding: 0;
 
     border-style: none;
+}
+
+
+
+
+
+
+.canvas {
+    background: yellow;
+
+    width: 640px;
+    height: 640px;
 }
