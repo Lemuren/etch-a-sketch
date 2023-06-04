@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.sidepanel {
+    background: red;
+    padding: 8px;
+    margin: 32px;
+}
+
+.color-picker {
+    display: flex;
+    margin: 8px;
+}
+
+#left-colors,
+#right-colors {
+    display: flex;
+    flex-direction: column;
+}
+
+.color-picker button {
+    width: 32px;
+    height: 32px;
+
+    padding: 8px;
+    margin: 2px;
+
+    border-style: solid;
+    border-width: 6px;
+}
+
+.size-picker {
+    margin: 8px;
+    background: blue;
+}
+
+.size-picker button {
+    text-align: center;
+
+    width: 26px;
+    height: 26px;
+
+    margin: 4px;
+    padding: 0;
+
+    border-style: none;
+}
