@@ -4,9 +4,12 @@ const CANVAS_SIZE = 640;
 let chosenColor = 'black';
 let pixelSize = 32;
 let isMouseDown = false;
+let drawGrid = true;
 
 document.body.onmousedown = () => isMouseDown = true;
 document.body.onmouseup = () => isMouseDown = false;
+
+document.querySelector('.toggle-grid').addEventListener('click', toggleGrid);
 
 
 function paint(e) {
@@ -18,9 +21,20 @@ function chooseColor(color) {
     chosenColor = color;
 }
 
+function toggleGrid() {
+    const pixels = document.querySelectorAll('.canvas div');
+
+    drawGrid = !drawGrid;
+    for (let pixel of pixels) {
+        pixel.style.cssText += drawGrid ? 'border-style: solid;' : 'border-style: none;';
+    }
+
+}
+
 
 function createCanvas() {
     const canvas = document.querySelector('.canvas');
+    drawGrid = true;
 
     // Remove any existing children.
     while (canvas.lastChild) {
