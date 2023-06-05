@@ -6,16 +6,44 @@ let pixelSize = 32;
 let isMouseDown = false;
 let drawGrid = true;
 
+let imageArray = new Array(pixelSize * pixelSize * 4);
+const colors = {
+    'aqua' : [0, 255, 255],
+    'black' : [0, 0, 0],
+    'blue' : [0, 0, 255],
+    'fuchsia' : [255, 0, 255],
+    'gray' : [128, 128, 128],
+    'green' : [0, 128, 0],
+    'lime' : [0, 255, 0],
+    'maroon' : [128, 0, 0],
+    'navy' : [0, 0, 128],
+    'olive' : [128, 128, 0],
+    'purple' : [128, 0, 128],
+    'red' : [255, 0, 0],
+    'silver' : [192, 192, 192],
+    'teal' : [0, 128, 128],
+    'white' : [255, 255, 255],
+    'yellow' : [255, 255, 0]
+};
+
 document.body.onmousedown = () => isMouseDown = true;
 document.body.onmouseup = () => isMouseDown = false;
-
 document.querySelector('.toggle-grid').addEventListener('click', toggleGrid);
-
+document.querySelector('#download').addEventListener('click', downloadImage);
 
 
 function paint(e) {
-    if ((isMouseDown) || (e.type == 'mousedown'))
+    if ((isMouseDown) || (e.type == 'mousedown')) {
         e.target.style.cssText += `background: ${chosenColor}`;
+        let index = 4 * +(e.target.id.substring(1));
+        imageArray[index + 0] = colors[chosenColor][0];
+        imageArray[index + 1] = colors[chosenColor][1];
+        imageArray[index + 2] = colors[chosenColor][2];
+        imageArray[index + 3] = 255;
+    }
+
+    
+
 }
 
 function chooseColor(color) {
@@ -41,8 +69,10 @@ function toggleGrid() {
 
 
 function createCanvas() {
+    imageArray = new Array(CANVAS_SIZE / pixelSize * CANVAS_SIZE / pixelSize * 4);
+    for (let i = 0; i < imageArray.length; i++)
+        imageArray[i] = 255;
     const canvas = document.querySelector('.canvas');
-    drawGrid = true;
 
     // Remove any existing children.
     while (canvas.lastChild) {
@@ -55,8 +85,13 @@ function createCanvas() {
         pixel.style.cssText = `width: ${pixelSize}px; height: ${pixelSize}px;`;
         pixel.addEventListener('mousedown', e => {e.preventDefault(); paint(e)});
         pixel.addEventListener('mouseover', paint);
+        pixel.id = `p${i}`;
         canvas.append(pixel);
     }
+
+    // Because toggleGrid toggles the grid we invert it before calling.
+    drawGrid = !drawGrid;
+    toggleGrid();
 }
 
 function setPixelSize(size) {
@@ -71,8 +106,32 @@ function setPixelSize(size) {
         else
             button.classList.remove('active');
     }
+
     createCanvas();
 }
+
+function downloadImage() {
+    let image = document.createElement('canvas');
+    image.height = CANVAS_SIZE / pixelSize;
+    image.width  = CANVAS_SIZE / pixelSize;
+    let context = image.getContext('2d');
+    let imageData = context.createImageData(image.height, image.width);
+
+    for (let i = 0; i < 4 * image.height * image.width; i++) {
+        imageData.data[i] = imageArray[i];
+    }
+
+    console.log(imageData);
+
+    context.putImageData(imageData, 0, 0);
+    document.querySelector('#download').setAttribute('href', image.toDataURL('image/bmp'));
+}
+
+
+
+
+
+
 
 
 // Set color of each of the colors in the color-picker.
