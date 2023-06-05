@@ -12,12 +12,20 @@ document.body.onmouseup = () => isMouseDown = false;
 document.querySelector('.toggle-grid').addEventListener('click', toggleGrid);
 
 
+
 function paint(e) {
     if ((isMouseDown) || (e.type == 'mousedown'))
         e.target.style.cssText += `background: ${chosenColor}`;
 }
 
 function chooseColor(color) {
+    const buttons = document.querySelectorAll('.color-picker button');
+    for (let button of buttons) {
+        if (button.id == color)
+            button.classList.add('active');
+        else
+            button.classList.remove('active');
+    }
     chosenColor = color;
 }
 
@@ -53,10 +61,17 @@ function createCanvas() {
 
 function setPixelSize(size) {
     let clear = confirm('Warning: This will clear the canvas!');
-    if (clear) {
-        pixelSize = CANVAS_SIZE / size;
-        createCanvas();
+    if (!clear) return;
+
+    pixelSize = CANVAS_SIZE / size;
+    const buttons = document.querySelectorAll('.size-picker button');
+    for (let button of buttons) {
+        if (button.id == size)
+            button.classList.add('active');
+        else
+            button.classList.remove('active');
     }
+    createCanvas();
 }
 
 

@@ -17,7 +17,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #222222;
+    background-color: #1d1921;
     margin: 0 0 32px 0;
     padding: 8px;
 }
@@ -35,10 +35,15 @@ h1 {
 .sidepanel {
     display: flex;
     flex-direction: column;
-    background: red;
+    background-color: #1d1921;
     padding: 8px;
     margin: 0 32px 32px 32px;
     height: 100%;
+    border-radius: 8px;
+
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
 }
 
 .color-picker {
@@ -64,20 +69,33 @@ h1 {
 }
 
 .size-picker {
+    display: flex;
+    justify-content: center;
+    font-size: 0;
     margin: 8px;
-    background: blue;
 }
 
 .size-picker button {
     text-align: center;
+    box-sizing: border-box;
 
     width: 26px;
     height: 26px;
 
-    margin: 0px;
-    padding: 0;
+    margin: 1px;
+    padding: 4px;
 
-    border-style: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.size-picker button.active {
+    background-color: #fff89b;
+}
+
+.color-picker button.active {
+    border-color: #fff89b;
 }
 
 .toggle-grid {
@@ -86,6 +104,7 @@ h1 {
     padding: 0;
     text-align: center;
 }
+
 
 
 
