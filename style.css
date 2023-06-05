@@ -1,9 +1,30 @@
 body {
+    background: #444444;
     margin: 0;
+    font-family: 'Press Start 2P';
 }
 
 h1 {
+    align-self: center;
     text-align: center;
+    color: white;
+
+    margin: 8px 0 0 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #222222;
+    margin: 0 0 32px 0;
+    padding: 8px;
+}
+
+.header img {
+    width: 400px;
+    height: auto;
 }
 
 .container {
@@ -72,6 +93,7 @@ h1 {
 .canvas {
     display: flex;
     flex-wrap: wrap;
+    background-color: white;
 
     flex-shrink: 0;
 
