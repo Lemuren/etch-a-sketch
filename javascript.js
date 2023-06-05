@@ -2,7 +2,7 @@
 const CANVAS_SIZE = 640;
 
 let chosenColor = 'black';
-let pixelSize = 32;
+let pixelSize = CANVAS_SIZE / 32;
 let isMouseDown = false;
 let drawGrid = true;
 
@@ -149,3 +149,4 @@ for (let button of sizeButtons) {
 
 
 createCanvas();
+console.log(pixelSize);
